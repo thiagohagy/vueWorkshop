@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meu app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div class="container" id="app">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Nosso app</h3>
+            </div>
+        </div>
+       
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h4>Form</h4>
+                <input type="text" class="form-control" v-model='nome'>
+                <p>Nome: {{nome}}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h4>Eventos</h4>
+
+                <div class="row">
+
+                    <div class="col">
+                        <button class="btn bt-sm btn-info" v-on:click='onClick()'>
+                            Clique
+                        </button>
+                        <button class="btn bt-sm btn-info" v-on:mouseOver='onClick()'>
+                            Mouse Over
+                        </button>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h4>Lista</h4>
+                <ul v-if='this.show'>
+                    <!-- <li v-for='hobbit in hobbits'>{{hobbit}}</li> -->
+                    <item-lista v-for='hobbit in hobbits' v-bind:valor='hobbit'></item-lista>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+
+<script>
+
+
+    Vue.component('item-lista',{
+        name: 'itemLista',
+        props:['valor'],
+        template: '<li>{{valor}}</li>',  
+    });
+
+    var app = new Vue({
+        el:'#app',
+        methods: {
+            onClick() {
+                alert('ola');
+                // this.show = !this.show;
+            }
+        },
+        data(){
+            return{
+                show: true,
+                nome: 'Gandalf the Grey',
+                hobbits: [
+                    'Bilbo', 'Frodo', 'Sam', 'Pipin', 'Mery'
+                ],
+                hobbits2: [
+                    {nome: 'Bilbo', idade: 111 },
+                    {nome: 'Frodo', idade: 50 },
+                    {nome: 'Sam', idade: 44},
+                    {nome: 'Pipin', idade: 46},
+                    {nome: 'Mery', idade: 45}
+                ],
+            }
+        },
+        mounted() {
+            alert('Mounted')
+        },
+        beforeMount() {
+            alert('Before mount')
+        },
+    })
+
+</script>
+</html>
